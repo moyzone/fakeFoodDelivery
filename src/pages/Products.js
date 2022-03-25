@@ -94,6 +94,9 @@ const Products = () => {
       key={uuidv4()}
       id={1}
       title={restaurantItem.name}
+      types={restaurantItem.food_types}
+      ratings={restaurantItem.ratings}
+      delivery_time={restaurantItem.delivery_time}
       price={restaurantItem.price_for_two}
       image={images[Math.floor(Math.random() * images.length)]}
     />
