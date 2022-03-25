@@ -18,6 +18,8 @@ const Products = () => {
 
   const [seeAll,setSeeAll]=useState(false);
 
+  const [showIndex,setShowIndex]=useState(5);
+
   useEffect(() => {
     loadProducts()
   }, [])
@@ -47,6 +49,10 @@ const Products = () => {
     else{
       setSelectedCat(event.target.getAttribute('value'));
     }
+  }
+  const changeShowIndex=()=>{
+    setShowIndex((prev)=>prev+3);
+    console.log(showIndex)
   }
 
   const filterProducts = (restaurants) => {
@@ -82,7 +88,7 @@ const Products = () => {
   console.log(restaurantList)
 
 
-  let restaurantCards = restaurantList.map((restaurantItem) => (
+  let restaurantCards = restaurantList.slice(0,showIndex).map((restaurantItem) => (
     
     <RestaurantCard
       key={uuidv4()}
@@ -95,6 +101,7 @@ const Products = () => {
 
   const loadMoreCards=<LoadMoreCard/>
 
+  console.log(restaurantList.length-showIndex);
   return (<ProductsWrapper>
     <div className="sidebar">
         <ul>
@@ -107,7 +114,7 @@ const Products = () => {
     </div>
     <div className='rightComp'>
       {restaurantCards}
-      <LoadMoreCard remaining={3}/>
+      <LoadMoreCard func={changeShowIndex} remaining={restaurantList.length-showIndex}/>
     </div>
     </ProductsWrapper>)
 }

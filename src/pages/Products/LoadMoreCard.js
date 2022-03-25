@@ -3,10 +3,13 @@ import styled from 'styled-components'
 
 const LoadMoreCard = (props) => {
 
+  if(props.remaining<1){
+    return <></>;
+  }
   return (
     <>
-      <Details>
-         <TextContainer>+ {props.remaining} MORE </TextContainer>
+      <Details onClick={props.func}>
+         <TextContainer>+ {props.remaining>3?3:props.remaining} MORE </TextContainer>
       </Details>
     </>
   )
