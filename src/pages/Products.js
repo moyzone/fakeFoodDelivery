@@ -14,6 +14,8 @@ const Products = () => {
 
   const images=Images;
 
+  const [seeAll,setSeeAll]=useState(false);
+
   useEffect(() => {
     loadProducts()
   }, [])
@@ -35,6 +37,16 @@ const Products = () => {
     return data
   }
 
+  const changeCat = (event) => {
+    if(event.target.getAttribute('value')=="See All"){
+      setSeeAll(true);
+      setSelectedCat(event.target.getAttribute('value'));
+    }
+    else{
+      setSelectedCat(event.target.getAttribute('value'));
+    }
+  }
+
   const filterProducts = (restaurants) => {
     return restaurants.filter(
       (restaurant) =>
@@ -45,26 +57,28 @@ const Products = () => {
     )
   }
 
-
   let restaurantList=[];
 
   for(let i=0;i<restaurants.length;i++){
-    if(restaurants[i].category==selectedCat){
-      restaurantList=restaurants[i].restaurantList;
-      break;
+    if(selectedCat=="See All"){
+      restaurants[i].restaurantList.forEach(element => {
+        restaurantList.push(element);
+      });
+    }else if(selectedCat=="Only on Swiggy"){
+      for(let j=0;j<restaurants[i].restaurantList.length;j++){
+        if(restaurants[i].restaurantList[j].isExlusive){
+          restaurantList.push(restaurants[i].restaurantList[j])
+        }
+      }
+    }else{
+      if(restaurants[i].category==selectedCat){
+        restaurantList=restaurants[i].restaurantList;
+        break;
+      }
     }
   }
   console.log(restaurantList)
-  
-  // const restaurantCards=restaurantList.map((restaurantItem)=>{
-  //       (<ProductCard
-  //         key={uuidv4()}
-  //         id={1}
-  //         title={restaurantItem.name}
-  //         price={restaurantItem.price_for_two}
-  //         image={images[Math.floor(Math.random() * images.length)]}
-  //       />)    
-  // })
+
 
   const restaurantCards = restaurantList.map((restaurantItem) => (
     <ProductCard
@@ -80,10 +94,10 @@ const Products = () => {
     <div className="sidebar">
         <ul>
           {restaurants.map((restaurant,i)=>{
-            return <li style={i==0?{color:"#e79e00"}:{}}>{restaurant.category}</li>
+            return <li value={restaurant.category} onClick={changeCat} style={restaurant.category==selectedCat?{color:"#e79e00"}:{}}>{restaurant.category}</li>
           })}
-          <li>Only on Swiggy</li>
-          <li>See All</li>
+          <li value="Only on Swiggy" onClick={changeCat}>Only on Swiggy</li>
+          <li value="See All" onClick={changeCat}>See All</li>
         </ul>
     </div>
     <div className='rightComp'>{restaurantCards}</div>
