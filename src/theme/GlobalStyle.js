@@ -18,7 +18,7 @@ const GlobalStyle = styled.createGlobalStyle`
   }
 
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'ProximaNova','arial','Helvetica Neue',sans-serif;
     font-size: 1.6rem;
     background-color: ${({ theme }) => theme.colors.grey.light};
     /* Footer support */
