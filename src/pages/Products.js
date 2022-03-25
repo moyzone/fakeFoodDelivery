@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from './Products/ProductCard'
+import LoadMoreCard from './Products/LoadMoreCard'
+
 import { setRestaurants } from '../state/actions/products'
 import './products.css';
 import Images from '../assets/images/images';
@@ -80,7 +82,8 @@ const Products = () => {
   console.log(restaurantList)
 
 
-  const restaurantCards = restaurantList.map((restaurantItem) => (
+  let restaurantCards = restaurantList.map((restaurantItem) => (
+    
     <ProductCard
       key={uuidv4()}
       id={1}
@@ -89,6 +92,8 @@ const Products = () => {
       image={images[Math.floor(Math.random() * images.length)]}
     />
   ))
+
+  const loadMoreCards=<LoadMoreCard/>
 
   return (<ProductsWrapper>
     <div className="sidebar">
@@ -100,7 +105,10 @@ const Products = () => {
           <li value="See All" onClick={changeCat}>See All</li>
         </ul>
     </div>
-    <div className='rightComp'>{restaurantCards}</div>
+    <div className='rightComp'>
+      {restaurantCards}
+      <LoadMoreCard remaining={3}/>
+    </div>
     </ProductsWrapper>)
 }
 
