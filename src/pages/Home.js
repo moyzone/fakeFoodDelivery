@@ -8,7 +8,7 @@ import routes from '../constants/routes.json'
 // import './Home.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { setRestaurants } from '../state/actions/products'
-import ProductCard from './Products/ProductCard'
+import RestaurantCard from './Products/RestaurantCard'
 import { v4 as uuidv4 } from 'uuid'
 import background from '../assets/images/background.png'
 // import underline from '../assets/images/underline.png'
@@ -45,7 +45,7 @@ const Home = () => {
     
   
     const productCards = restaurants.map((product) => (
-      <ProductCard
+      <RestaurantCard
         key={uuidv4()}
         id={product.id}
         title={product.title}

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import Button from '../../components/elements/Button'
 import { addToCart } from '../../state/actions/cart'
 
-const ProductCard = ({ id, title, price, image, category }) => {
+const RestaurantCard = ({ id, title, price, image, category }) => {
   const product = { id, title, price, image, category }
   const dispatch = useDispatch()
 
@@ -32,7 +32,7 @@ const ProductCard = ({ id, title, price, image, category }) => {
   )
 }
 
-ProductCard.propTypes = {
+RestaurantCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -55,7 +55,7 @@ const Image = styled.img`
 
 const ImageContainer = styled.div`
   // height: 25rem;
-  padding: 3rem;
+  padding: 0.5rem;
   // margin: 0 auto;
 `
 
@@ -69,6 +69,7 @@ const Details = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.grey.main};
   border-radius: 10px;
 
+  cursor:pointer;
   padding:5rem;
   margin: 3rem;  
   // flex: 1 1 px;
@@ -89,4 +90,4 @@ const Title = styled.div`
   font-weight: bold;
 `
 
-export default ProductCard
+export default RestaurantCard

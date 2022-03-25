@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import ProductCard from './Products/ProductCard'
+import RestaurantCard from './Products/RestaurantCard'
 import LoadMoreCard from './Products/LoadMoreCard'
 
 import { setRestaurants } from '../state/actions/products'
@@ -84,7 +84,7 @@ const Products = () => {
 
   let restaurantCards = restaurantList.map((restaurantItem) => (
     
-    <ProductCard
+    <RestaurantCard
       key={uuidv4()}
       id={1}
       title={restaurantItem.name}

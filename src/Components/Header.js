@@ -23,7 +23,7 @@ const Header = () => {
         </Link>
         <Navbar>
           <NavbarLink to={routes.HOME}>Home</NavbarLink>
-          <NavbarLink to={routes.RESTAURANTS}>Restaurants</NavbarLink>
+          <NavbarLink to={routes.RESTAURANTS}>All Restaurants</NavbarLink>
           <NavbarLink to={routes.CONTACT}>Contact</NavbarLink>
           <ButtonContainer onClick={() => dispatch(openCart())}>
             <Button content={<FaShoppingCart />} shape="round" />
