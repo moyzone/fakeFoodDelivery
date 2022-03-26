@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../../state/actions/cart'
 import './RestaurantCard.css'
 
 const RestaurantCard = ({ id, title, types, ratings,delivery_time, price, image, category }) => {
   const dispatch = useDispatch()
 
-  console.log(types.toString());
 
   return (
     <>
@@ -35,32 +33,30 @@ const RestaurantCard = ({ id, title, types, ratings,delivery_time, price, image,
 
 
 const Image = styled.img`
-  height: 20rem;
+  height: 30rem;
 `
 
 const ImageContainer = styled.div`
-  padding: 0.5rem;
 `
 const QuickView = styled.div`
   // flex-direction: column;
   justify-content: center;
   height: 15rem;
-  border-top: 2px outset rgb(148, 147, 147);
+  border-top: 1px outset #e6e6e6;
   display:none;
   color:#413ece;
   text-shadow: 1px 1px 1px #969696;
 `
 
 const MainDiv = styled.div`
-    border-radius: 10px;
     cursor:pointer;
     padding:5rem;
-    margin: 3rem;  
-    flex-basis: 40rem;
-    height: 50rem;
+    margin: 1rem;  
+    flex-basis: 45rem;
+    height: 55rem;
 
     &:hover{
-      box-shadow: 1px 1px 15px 1px rgb(107, 107, 107);
+      box-shadow: 0.1px 0.5px 2px 0.5px rgb(107, 107, 107);
     }
 
     &:hover ${QuickView} {

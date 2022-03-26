@@ -1,19 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { FaShoppingCart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from './elements/Button'
 import routes from '../constants/routes.json'
-import { openCart } from '../state/actions'
 
 const Header = () => {
-  const cart = useSelector((state) => state.cart)
-  const dispatch = useDispatch()
-
-  const sumQuantity = () => {
-    return cart.reduce((quantity, cartItem) => quantity + cartItem.quantity, 0)
-  }
 
   return (
     <HeaderWrapper>
@@ -23,12 +15,7 @@ const Header = () => {
         </Link>
         <Navbar>
           <NavbarLink to={routes.HOME}>Home</NavbarLink>
-          <NavbarLink to={routes.RESTAURANTS}>All Restaurants</NavbarLink>
           <NavbarLink to={routes.CONTACT}>Contact</NavbarLink>
-          <ButtonContainer onClick={() => dispatch(openCart())}>
-            <Button content={<FaShoppingCart />} shape="round" />
-            {sumQuantity() > 0 ? <Quantity>{sumQuantity()}</Quantity> : ''}
-          </ButtonContainer>
         </Navbar>
       </Container>
     </HeaderWrapper>

@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState, useRef } from 'react'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,17 +8,21 @@ import LoadMoreCard from './Products/LoadMoreCard'
 import { setRestaurants } from '../state/actions/products'
 import './products.css';
 import Images from '../assets/images/images';
+import RestaurantContainer from './Products/RestaurantContainer'
+
 
 const Products = () => {
   const restaurants = useSelector((state) => state.restaurants)
   const dispatch = useDispatch()
   const [selectedCat,setSelectedCat]=useState([]);
 
-  const images=Images;
-
   const [seeAll,setSeeAll]=useState(false);
 
   const [showIndex,setShowIndex]=useState(5);
+
+  const catRefs=useRef([]);
+
+  catRefs.current=[];
 
   useEffect(() => {
     loadProducts()
@@ -37,22 +41,18 @@ const Products = () => {
   const fetchProducts = async () => {
     const response = await fetch('http://cdn.adpushup.com/reactTask.json')
     let data = await response.json()
-    console.log(data)
     return data
   }
 
-  const changeCat = (event) => {
-    if(event.target.getAttribute('value')=="See All"){
-      setSeeAll(true);
-      setSelectedCat(event.target.getAttribute('value'));
-    }
-    else{
-      setSelectedCat(event.target.getAttribute('value'));
-    }
-  }
-  const changeShowIndex=()=>{
-    setShowIndex((prev)=>prev+3);
-    console.log(showIndex)
+  const changeCat = (event,index) => {
+    let el=event.target.getAttribute('value');
+    let selectedRef;
+    catRefs.current.forEach((ref)=>{
+      if(ref.getAttribute('value')==el){
+        selectedRef=ref
+      }
+      })
+    window.scrollTo({top:selectedRef.offsetTop,behavior:'smooth'})
   }
 
   const filterProducts = (restaurants) => {
@@ -67,46 +67,37 @@ const Products = () => {
 
   let restaurantList=[];
 
+
   for(let i=0;i<restaurants.length;i++){
-    if(selectedCat=="See All"){
       restaurants[i].restaurantList.forEach(element => {
         restaurantList.push(element);
       });
-    }else if(selectedCat=="Only on Swiggy"){
-      for(let j=0;j<restaurants[i].restaurantList.length;j++){
-        if(restaurants[i].restaurantList[j].isExlusive){
-          restaurantList.push(restaurants[i].restaurantList[j])
-        }
-      }
-    }else{
-      if(restaurants[i].category==selectedCat){
-        restaurantList=restaurants[i].restaurantList;
-        break;
-      }
-    }
   }
-  console.log(restaurantList)
+
+  let innerSection=[];
+
+  const addToRefs =(el)=>{
+    if(el && !catRefs.current.includes(el)){
+      catRefs.current.push(el);
+    }
+    console.log(catRefs)
+  }
+
+  const inputRef=useRef();
+
+  for(let i=0;i<restaurants.length;i++){
+    innerSection.push(<><span value={restaurants[i].category} ref={addToRefs}></span><RestaurantContainer restaurant={restaurants[i]}/></>)
+  }
+
+  let seeAllRest={
+    'category':"See All",
+    'restaurantList':restaurantList
+  }
+  innerSection.push(<RestaurantContainer restaurant={seeAllRest}/>)
 
 
-  let restaurantCards = restaurantList.slice(0,showIndex).map((restaurantItem) => (
-    
-    <RestaurantCard
-      key={uuidv4()}
-      id={1}
-      title={restaurantItem.name}
-      types={restaurantItem.food_types}
-      ratings={restaurantItem.ratings}
-      delivery_time={restaurantItem.delivery_time}
-      price={restaurantItem.price_for_two}
-      image={images[Math.floor(Math.random() * images.length)]}
-    />
-  ))
-
-  const loadMoreCards=<LoadMoreCard/>
-
-  console.log(restaurantList.length-showIndex);
   return (<ProductsWrapper>
-    <div className="sidebar">
+    <div ref={inputRef} className="sidebar">
         <ul>
           {restaurants.map((restaurant,i)=>{
             return <li value={restaurant.category} onClick={changeCat} style={restaurant.category==selectedCat?{color:"#e79e00"}:{}}>{restaurant.category}</li>
@@ -116,8 +107,7 @@ const Products = () => {
         </ul>
     </div>
     <div className='rightComp'>
-      {restaurantCards}
-      <LoadMoreCard func={changeShowIndex} remaining={restaurantList.length-showIndex}/>
+      {innerSection}
     </div>
     </ProductsWrapper>)
 }

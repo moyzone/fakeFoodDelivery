@@ -23,22 +23,14 @@ const TextContainer = styled.div`
 `
 
 const Details = styled.div`
-  // display: flex;
-  flex-direction: row;
-//   justify-content: center;
-//   align-content: center;
-  // gap: 2rem;
-  // height: 30rem;
-
-  border: 1px solid ${({ theme }) => theme.colors.swiggy};
-  border-radius: 10px;
-
+  flex-direction: row;  
+  border: 5px solid ${({ theme }) => theme.colors.swiggy};
+  color: ${({ theme }) => theme.colors.swiggy};
   font-size:5rem;
 
   cursor:pointer;
   padding:5rem;
   margin: 3rem;  
   flex-basis: 400px;
-  border-top: 1px solid ${({ theme }) => theme.colors.grey.main};
 `
 export default LoadMoreCard
