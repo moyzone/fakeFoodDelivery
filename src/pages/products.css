@@ -8,7 +8,9 @@
     top:12rem;
     left:3rem;
     background-color: white;
+
 }
+
 .sidebar ul{
     width: 100%;
     padding-top: 7rem;
@@ -40,4 +42,12 @@
     flex-direction: row;
     background-color: #fff;
     font-size: 2rem;  
+  }
+  @media only screen and (max-width: 1000px) {
+    .sidebar{
+      display:none;
+    }
+    .sidebar ul{
+      background-color: red;
+    }
   }
