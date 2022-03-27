@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
 import './RestaurantCard.css'
 
 const RestaurantCard = ({ id, title, types, ratings,delivery_time, price, image, category }) => {
-  const dispatch = useDispatch()
 
 
   return (
