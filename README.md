@@ -1,5 +1,11 @@
-# How to setup React with Webpack
+A fake swiggy created with React. It is a trimmed down version of Swiggy.
 
-## A minimal React application configured with Webpack
+![image](https://user-images.githubusercontent.com/26134663/160276730-f6ae1f41-c622-48c1-8d9b-e15b36f9a8cc.png)
 
-Feel free to use it to follow through my article, or to use it as a starting point to any of your own applications.
+TO INSTALL:-
+
+1.npm install
+2.npm start
+
+TO TEST:-
+1.npm test
