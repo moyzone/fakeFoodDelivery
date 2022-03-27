@@ -44,7 +44,7 @@ const Container = styled.div`
 
 const Logo = styled.h1`
   color: ${({ theme }) => theme.colors.swiggy};
-  font-size: 6rem;
+  font-size: 5rem;
   font-family:ProximaNova,arial,Helvetica Neue,sans-serif
 `
 
@@ -53,7 +53,7 @@ const Navbar = styled.nav`
   align-items: center;
   justify-content: space-between;
   gap: 7rem;
-  font-size: 2.4rem;
+  font-size: 2rem;
 
   @media (max-width: 480px) {
     gap: 0;

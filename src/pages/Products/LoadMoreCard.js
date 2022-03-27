@@ -31,6 +31,6 @@ const Details = styled.div`
   cursor:pointer;
   padding:5rem;
   margin: 3rem;  
-  flex-basis: 400px;
+  flex-basis: 250px;
 `
 export default LoadMoreCard

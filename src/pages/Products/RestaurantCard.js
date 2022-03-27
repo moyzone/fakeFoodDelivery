@@ -50,7 +50,7 @@ const MainDiv = styled.div`
     cursor:pointer;
     padding:5rem;
     margin: 1rem;  
-    flex-basis: 45rem;
+    flex-basis: 40rem;
     height: 55rem;
 
     &:hover{
