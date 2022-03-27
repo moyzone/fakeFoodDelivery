@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from './elements/Button'
 import routes from '../constants/routes.json'
 
 const Header = () => {
