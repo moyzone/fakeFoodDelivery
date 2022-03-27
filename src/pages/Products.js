@@ -1,13 +1,9 @@
 import React, { useEffect,useState, useRef } from 'react'
 import styled from 'styled-components'
-import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import RestaurantCard from './Products/RestaurantCard'
-import LoadMoreCard from './Products/LoadMoreCard'
 
 import { setRestaurants } from '../state/actions/products'
 import './products.css';
-import Images from '../assets/images/images';
 import RestaurantContainer from './Products/RestaurantContainer'
 
 
@@ -52,7 +48,10 @@ const Products = () => {
         selectedRef=ref
       }
       })
-    window.scrollTo({top:selectedRef.offsetTop,behavior:'smooth'})
+    let fd=selectedRef.offsetTop-100
+    console.log(selectedRef.offsetTop-10);
+    window.scrollTo({top:fd,behavior:'smooth'})
+    setSelectedCat(event.target.getAttribute('value'))
   }
 
   const filterProducts = (restaurants) => {
@@ -66,10 +65,13 @@ const Products = () => {
   }
 
   let restaurantList=[];
-
+  let onlyOnSwiggyRest=[];
 
   for(let i=0;i<restaurants.length;i++){
       restaurants[i].restaurantList.forEach(element => {
+        if(element.isExlusive){
+          onlyOnSwiggyRest.push(element);
+        }
         restaurantList.push(element);
       });
   }
@@ -80,7 +82,6 @@ const Products = () => {
     if(el && !catRefs.current.includes(el)){
       catRefs.current.push(el);
     }
-    console.log(catRefs)
   }
 
   const inputRef=useRef();
@@ -93,17 +94,23 @@ const Products = () => {
     'category':"See All",
     'restaurantList':restaurantList
   }
-  innerSection.push(<RestaurantContainer restaurant={seeAllRest}/>)
+  let onlyOnSwiggy={
+    'category':"Only on Swiggy",
+    'restaurantList':onlyOnSwiggyRest
+  }
+  innerSection.push(<><span value='Only on Swiggy' ref={addToRefs}></span><RestaurantContainer restaurant={onlyOnSwiggy}/></>)
+  innerSection.push(<><span value='See All' ref={addToRefs}></span><RestaurantContainer restaurant={seeAllRest}/></>)
 
 
   return (<ProductsWrapper>
+    <span></span>
     <div ref={inputRef} className="sidebar">
         <ul>
           {restaurants.map((restaurant,i)=>{
-            return <li value={restaurant.category} onClick={changeCat} style={restaurant.category==selectedCat?{color:"#e79e00"}:{}}>{restaurant.category}</li>
+            return <li value={restaurant.category} onClick={changeCat} style={restaurant.category==selectedCat?{color:"white",background: "#e46d47"}:{}}>{restaurant.category}</li>
           })}
-          <li value="Only on Swiggy" onClick={changeCat}>Only on Swiggy</li>
-          <li value="See All" onClick={changeCat}>See All</li>
+          <li value="Only on Swiggy" onClick={changeCat} style={selectedCat=="Only on Swiggy"?{color:"white",background: "#e46d47"}:{}}>Only on Swiggy</li>
+          <li value="See All" onClick={changeCat} style={selectedCat=="See All"?{color:"white",background: "#e46d47"}:{}}>See All</li>
         </ul>
     </div>
     <div className='rightComp'>
@@ -114,7 +121,7 @@ const Products = () => {
 
 const ProductsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr  4fr;
+  grid-template-columns: 1fr 4fr;
   gap: 2rem;
   margin-top: 1rem;
 

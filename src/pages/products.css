@@ -1,19 +1,22 @@
 .sidebar{
-    width: 20vw;
+    width:35rem;
     height :auto;
-    /* border:0; */
     box-shadow: 2px 0px 1px -2px #888;
     justify-content: center;
     display: flex;
-    position:sticky;
-    top:0;
+    position:fixed;
+    top:15rem;
+    left:3rem;
+    background-color: white;
 }
 .sidebar ul{
-    padding: 5rem;
+    width: 100%;
+    padding: 0rem;
+    text-align: center;
 }
 .sidebar li {
-    padding: 6px 8px 6px 16px;
-    margin: 10rem 0;
+    margin:0 auto;
+    padding:4rem;
     text-decoration: none;
     font-size: 20px;
     color: #818181;
@@ -25,13 +28,11 @@
     cursor:pointer;
   }
 
-  /* .rightComp{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+  .rightComp{
+    margin-top: 15rem;
     background-color: #fff;
     font-size: 2rem;  
-  } */
+  }
 
   .restaurantsSec{
     display: flex;

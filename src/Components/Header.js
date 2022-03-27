@@ -27,6 +27,7 @@ const HeaderWrapper = styled.header`
   // box-shadow: 0 5px 10px -2px #888;
   width:100%;
   top:0;
+  position:fixed;
 `
 
 const Container = styled.div`
