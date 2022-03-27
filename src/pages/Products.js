@@ -35,7 +35,7 @@ const Products = () => {
   }
 
   const fetchProducts = async () => {
-    const response = await fetch('http://cdn.adpushup.com/reactTask.json')
+    const response = await fetch('https://cdn.adpushup.com/reactTask.json')
     let data = await response.json()
     return data
   }
