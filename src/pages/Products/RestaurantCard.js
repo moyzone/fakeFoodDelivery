@@ -12,12 +12,12 @@ const RestaurantCard = ({ id, title, types, ratings,delivery_time, price, image,
            <Image src={image} alt={title} />
         </ImageContainer>
         <Info>
-           <Title>{title}</Title>
+           <Title data-testid="titleTest">{title}</Title>
            <Types>{types.toString()}</Types>
            <br/>
            <LastInfo>
            <span>&#9733;{ratings?ratings:'--'}</span>
-           <span>{delivery_time}</span>
+           <span data-testid="deliveryTest">{delivery_time}</span>
            <span>Rs.{price} for two</span>
             </LastInfo>
          </Info>
